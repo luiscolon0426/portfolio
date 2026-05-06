@@ -464,6 +464,114 @@ h5 {
   justify-content: center;
 }
 
+/* Works carousel */
+.projects-carousel {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.carousel-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.carousel-viewport::-webkit-scrollbar {
+  display: none; /* Safari/Chrome */
+}
+
+.carousel-track.projects-row {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 24px;
+  padding: 14px 56px;
+  width: max-content;
+}
+
+.carousel-track .project-box {
+  flex: 0 0 clamp(260px, 80vw, 510px);
+  scroll-snap-align: center;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(15, 15, 20, 0.65);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.carousel-btn:hover {
+  background: rgba(15, 15, 20, 0.85);
+}
+
+.carousel-btn:focus-visible {
+  outline: 2px solid var(--secondary-accent);
+  outline-offset: 2px;
+}
+
+.carousel-btn-prev {
+  left: 10px;
+}
+
+.carousel-btn-next {
+  right: 10px;
+}
+
+.carousel-btn span {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+}
+
+.carousel-dot[aria-current="true"] {
+  background: var(--secondary-accent);
+}
+
+@media (hover: none) {
+  .carousel-btn {
+    display: none;
+  }
+}
+
+.carousel-track .project-box a {
+  width: 100%;
+}
+
+.carousel-track .project-img {
+  border-radius: 16px;
+}
+
+.carousel-track .project-mask {
+  border-radius: 16px;
+}
+
 .project-box {
   position: relative;
   overflow: hidden;

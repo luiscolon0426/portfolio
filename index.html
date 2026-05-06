@@ -226,7 +226,12 @@
         <h2 class="title">Works</h2>
       </div>
 
-      <div class="projects-row">
+      <div class="projects-carousel" data-carousel="projects">
+        <button class="carousel-btn carousel-btn-prev" type="button" aria-label="Previous work">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <div class="carousel-viewport" data-carousel-viewport>
+          <div class="projects-row carousel-track" data-carousel-track>
         <div class="project-box" data-aos="fade-zoom-in" data-aos-easing="ease-in-out" data-aos-duration="1000">
           <a href="#!">
             <img class="project-img" src="img/works/01.jpg" alt="" />
@@ -298,6 +303,12 @@
             </div>
           </a>
         </div>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-btn-next" type="button" aria-label="Next work">
+          <span aria-hidden="true">›</span>
+        </button>
+        <div class="carousel-dots" data-carousel-dots aria-label="Works carousel pagination"></div>
       </div>
     </div>
   </section>
