@@ -869,32 +869,93 @@ h5 {
 }
 
 .about-skills {
-  display: flex;
-  justify-content: center;
+  min-width: 0;
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-  gap: 24px 16px;
-  justify-items: center;
+.skill-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
   width: 100%;
-  max-width: none;
-  padding: 0 1rem;
+}
+
+.skill-group-title {
+  margin-bottom: 10px;
+  color: var(--gray-text-color);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.skill-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skill-carousel-controls {
+  display: none;
+}
+
+.skills-track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(72px, 1fr));
+  gap: 10px;
+}
+
+.skills-track:focus-visible {
+  border-radius: 10px;
+  outline: 2px solid var(--secondary-accent);
+  outline-offset: 4px;
 }
 
 .skill-icon {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  min-height: 88px;
+  padding: 12px 6px 10px;
+  border: 1px solid var(--gray-color-3);
+  border-radius: 10px;
+  background: var(--white-color);
   text-align: center;
-  font-size: 42px;
-  width: 70px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
 
+.skill-icon:hover {
+  border-color: var(--gray-color-2);
+  box-shadow: 0 8px 22px rgba(12, 22, 24, 0.08);
+  transform: translateY(-2px);
+}
+
+.skill-icon i {
+  font-size: 34px;
 }
 
 .skill-icon span {
   font-size: 11px;
-    margin-top: 8px;
+  margin-top: 8px;
   color: var(--main-text-color);
+}
+
+.skill-group-additional {
+  padding-top: 2px;
+}
+
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-chips li {
+  padding: 6px 11px;
+  border: 1px solid var(--gray-color-3);
+  border-radius: 999px;
+  background-color: var(--primary-bg-color);
+  color: var(--supportive-text-color);
+  font-size: 11px;
+  line-height: 1;
 }

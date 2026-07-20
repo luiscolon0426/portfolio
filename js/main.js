@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   form();
   skillbar();
   initProjectsCarousel();
+  initSkillsCarousels();
 
   const nav = document.querySelector("#nav");
   const navBtn = document.querySelector("#nav-btn");
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  let sections = document.querySelectorAll("section");
+  let sections = document.querySelectorAll("body > section");
   let navLinks = document.querySelectorAll("header nav a");
 
   window.onscroll = () => {
@@ -58,6 +59,117 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 });
+
+function initSkillsCarousels() {
+  const mobileQuery = window.matchMedia("(max-width: 720px)");
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  document.querySelectorAll(".skill-group").forEach((group) => {
+    const track = group.querySelector(".skills-track");
+    const prevBtn = group.querySelector(".skill-carousel-prev");
+    const nextBtn = group.querySelector(".skill-carousel-next");
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    let autoplayTimer = null;
+    let isVisible = false;
+    let isInteracting = false;
+
+    const getStep = () => {
+      const card = track.querySelector(".skill-icon");
+      if (!card) return track.clientWidth;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    const updateControls = () => {
+      const maxScroll = track.scrollWidth - track.clientWidth;
+      prevBtn.disabled = track.scrollLeft <= 2;
+      nextBtn.disabled = track.scrollLeft >= maxScroll - 2;
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (
+        !mobileQuery.matches ||
+        reducedMotionQuery.matches ||
+        !isVisible ||
+        isInteracting ||
+        document.hidden
+      ) return;
+
+      autoplayTimer = window.setInterval(() => {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (maxScroll <= 2) return;
+
+        const reachedEnd = track.scrollLeft >= maxScroll - 2;
+        track.scrollTo({
+          left: reachedEnd ? 0 : Math.min(track.scrollLeft + getStep(), maxScroll),
+          behavior: "smooth",
+        });
+      }, 3200);
+    };
+
+    const pauseForInteraction = () => {
+      isInteracting = true;
+      stopAutoplay();
+    };
+
+    const resumeAfterInteraction = () => {
+      isInteracting = false;
+      startAutoplay();
+    };
+
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -getStep(), behavior: "smooth" });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: getStep(), behavior: "smooth" });
+    });
+
+    group.addEventListener("pointerenter", pauseForInteraction);
+    group.addEventListener("pointerleave", resumeAfterInteraction);
+    group.addEventListener("pointerdown", pauseForInteraction);
+    group.addEventListener("pointerup", resumeAfterInteraction);
+    group.addEventListener("focusin", pauseForInteraction);
+    group.addEventListener("focusout", (event) => {
+      if (!group.contains(event.relatedTarget)) resumeAfterInteraction();
+    });
+
+    track.addEventListener("scroll", updateControls, { passive: true });
+    window.addEventListener("resize", () => {
+      updateControls();
+      startAutoplay();
+    });
+    document.addEventListener("visibilitychange", startAutoplay);
+    mobileQuery.addEventListener("change", startAutoplay);
+    reducedMotionQuery.addEventListener("change", startAutoplay);
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          isVisible = entry.isIntersecting;
+          startAutoplay();
+        },
+        { threshold: 0.35 }
+      );
+      observer.observe(group);
+    } else {
+      isVisible = true;
+      startAutoplay();
+    }
+
+    updateControls();
+  });
+}
 
 function initProjectsCarousel() {
   const carousel = document.querySelector('[data-carousel="projects"]');
