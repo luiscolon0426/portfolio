@@ -373,6 +373,10 @@ h5 {
   line-height: 1;
 }
 
+.impact-item .impact-value-long {
+  font-size: clamp(1.35rem, 1.05rem + 1.5vw, 2.15rem);
+}
+
 .impact-item span {
   display: block;
   margin-top: 8px;
