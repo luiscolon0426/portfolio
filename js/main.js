@@ -1,63 +1,62 @@
 "use strict";
-import form from "./form.js";
-import skillbar from "./skillbar.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  AOS.init({
-    once: true,
-  });
-  form();
-  skillbar();
+  if (window.AOS) {
+    window.AOS.init({ once: true });
+  }
+
+  initNavigation();
   initSkillsCarousels();
 
+  const year = document.querySelector("[data-current-year]");
+  if (year) year.textContent = new Date().getFullYear();
+});
+
+function initNavigation() {
+  const header = document.querySelector("#header");
+  const hero = document.querySelector("#home");
+  const goToTop = document.querySelector("#goToTop");
   const nav = document.querySelector("#nav");
   const navBtn = document.querySelector("#nav-btn");
   const navBtnImg = document.querySelector("#nav-btn-img");
+  const sections = document.querySelectorAll("body > section[id]");
+  const navLinks = document.querySelectorAll("header nav a[href^='#']");
 
-  //Hamburger menu
-  navBtn.onclick = () => {
-    if (nav.classList.toggle("open")) {
-      navBtnImg.src = "img/icons/close.svg";
-    } else {
-      navBtnImg.src = "img/icons/open.svg";
-    }
+  if (!header || !hero || !nav || !navBtn || !navBtnImg) return;
+
+  const setMenuOpen = (open) => {
+    nav.classList.toggle("open", open);
+    navBtn.setAttribute("aria-expanded", String(open));
+    navBtnImg.src = open ? "img/icons/close.svg" : "img/icons/open.svg";
   };
 
-  window.addEventListener("scroll", function () {
-    const header = document.querySelector("#header");
-    const hero = document.querySelector("#home");
-    let triggerHeight = hero.offsetHeight - 170;
-
-    if (window.scrollY > triggerHeight) {
-      header.classList.add("header-sticky");
-      goToTop.classList.add("reveal");
-    } else {
-      header.classList.remove("header-sticky");
-      goToTop.classList.remove("reveal");
-    }
+  navBtn.addEventListener("click", () => setMenuOpen(!nav.classList.contains("open")));
+  navLinks.forEach((link) => link.addEventListener("click", () => setMenuOpen(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenuOpen(false);
   });
 
-  let sections = document.querySelectorAll("body > section");
-  let navLinks = document.querySelectorAll("header nav a");
+  const updatePageState = () => {
+    const stickyPoint = hero.offsetHeight - 170;
+    const pastHero = window.scrollY > stickyPoint;
+    header.classList.toggle("header-sticky", pastHero);
+    goToTop?.classList.toggle("reveal", pastHero);
 
-  window.onscroll = () => {
-    sections.forEach((sec) => {
-      let top = window.scrollY;
-      let offset = sec.offsetTop - 170;
-      let height = sec.offsetHeight;
-      let id = sec.getAttribute("id");
+    sections.forEach((section) => {
+      const isCurrent =
+        window.scrollY >= section.offsetTop - 170 &&
+        window.scrollY < section.offsetTop - 170 + section.offsetHeight;
 
-      if (top >= offset && top < offset + height) {
-        navLinks.forEach((links) => {
-          links.classList.remove("active");
-          document
-            .querySelector("header nav a[href*=" + id + "]")
-            .classList.add("active");
-        });
-      }
+      if (!isCurrent) return;
+      navLinks.forEach((link) => link.classList.remove("active"));
+      document.querySelector(`header nav a[href="#${section.id}"]`)?.classList.add("active");
     });
   };
-});
+
+  window.addEventListener("scroll", updatePageState, { passive: true });
+  window.addEventListener("resize", updatePageState);
+  updatePageState();
+}
 
 function initSkillsCarousels() {
   const mobileQuery = window.matchMedia("(max-width: 720px)");
@@ -71,6 +70,8 @@ function initSkillsCarousels() {
     if (!track || !prevBtn || !nextBtn) return;
 
     let autoplayTimer = null;
+    let autoplayFrame = null;
+    let autoplayDirection = 1;
     let isVisible = false;
     let isInteracting = false;
 
@@ -88,10 +89,27 @@ function initSkillsCarousels() {
     };
 
     const stopAutoplay = () => {
-      if (autoplayTimer) {
-        window.clearInterval(autoplayTimer);
-        autoplayTimer = null;
-      }
+      if (autoplayTimer) window.clearInterval(autoplayTimer);
+      if (autoplayFrame) window.cancelAnimationFrame(autoplayFrame);
+      autoplayTimer = null;
+      autoplayFrame = null;
+    };
+
+    const glideTo = (target, duration = 1400) => {
+      const start = track.scrollLeft;
+      const distance = target - start;
+      const startTime = performance.now();
+
+      const animate = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 0.5 - Math.cos(progress * Math.PI) / 2;
+        track.scrollLeft = start + distance * eased;
+
+        if (progress < 1) autoplayFrame = window.requestAnimationFrame(animate);
+        else autoplayFrame = null;
+      };
+
+      autoplayFrame = window.requestAnimationFrame(animate);
     };
 
     const startAutoplay = () => {
@@ -107,42 +125,32 @@ function initSkillsCarousels() {
       autoplayTimer = window.setInterval(() => {
         const maxScroll = track.scrollWidth - track.clientWidth;
         if (maxScroll <= 2) return;
+        if (track.scrollLeft >= maxScroll - 2) autoplayDirection = -1;
+        if (track.scrollLeft <= 2) autoplayDirection = 1;
 
-        const reachedEnd = track.scrollLeft >= maxScroll - 2;
-        track.scrollTo({
-          left: reachedEnd ? 0 : Math.min(track.scrollLeft + getStep(), maxScroll),
-          behavior: "smooth",
-        });
-      }, 3200);
+        glideTo(Math.max(0, Math.min(track.scrollLeft + getStep() * autoplayDirection, maxScroll)));
+      }, 2800);
     };
 
-    const pauseForInteraction = () => {
+    const pause = () => {
       isInteracting = true;
       stopAutoplay();
     };
-
-    const resumeAfterInteraction = () => {
+    const resume = () => {
       isInteracting = false;
       startAutoplay();
     };
 
-    prevBtn.addEventListener("click", () => {
-      track.scrollBy({ left: -getStep(), behavior: "smooth" });
-    });
-
-    nextBtn.addEventListener("click", () => {
-      track.scrollBy({ left: getStep(), behavior: "smooth" });
-    });
-
-    group.addEventListener("pointerenter", pauseForInteraction);
-    group.addEventListener("pointerleave", resumeAfterInteraction);
-    group.addEventListener("pointerdown", pauseForInteraction);
-    group.addEventListener("pointerup", resumeAfterInteraction);
-    group.addEventListener("focusin", pauseForInteraction);
+    prevBtn.addEventListener("click", () => track.scrollBy({ left: -getStep(), behavior: "smooth" }));
+    nextBtn.addEventListener("click", () => track.scrollBy({ left: getStep(), behavior: "smooth" }));
+    group.addEventListener("pointerenter", pause);
+    group.addEventListener("pointerleave", resume);
+    group.addEventListener("pointerdown", pause);
+    group.addEventListener("pointerup", resume);
+    group.addEventListener("focusin", pause);
     group.addEventListener("focusout", (event) => {
-      if (!group.contains(event.relatedTarget)) resumeAfterInteraction();
+      if (!group.contains(event.relatedTarget)) resume();
     });
-
     track.addEventListener("scroll", updateControls, { passive: true });
     window.addEventListener("resize", () => {
       updateControls();
@@ -168,94 +176,4 @@ function initSkillsCarousels() {
 
     updateControls();
   });
-}
-
-function initProjectsCarousel() {
-  const carousel = document.querySelector('[data-carousel="projects"]');
-  if (!carousel) return;
-
-  const viewport = carousel.querySelector("[data-carousel-viewport]");
-  const track = carousel.querySelector("[data-carousel-track]");
-  const prevBtn = carousel.querySelector(".carousel-btn-prev");
-  const nextBtn = carousel.querySelector(".carousel-btn-next");
-  const dotsRoot = carousel.querySelector("[data-carousel-dots]");
-
-  if (!viewport || !track) return;
-
-  const slides = Array.from(track.querySelectorAll(".project-box"));
-  if (slides.length === 0) return;
-
-  const scrollToIndex = (index) => {
-    const clamped = Math.max(0, Math.min(slides.length - 1, index));
-    slides[clamped].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-    setActiveDot(clamped);
-  };
-
-  const setActiveDot = (activeIndex) => {
-    if (!dotsRoot) return;
-    const dots = Array.from(dotsRoot.querySelectorAll("button.carousel-dot"));
-    dots.forEach((dot, i) => {
-      dot.setAttribute("aria-current", i === activeIndex ? "true" : "false");
-    });
-  };
-
-  const getActiveIndex = () => {
-    const viewportRect = viewport.getBoundingClientRect();
-    const viewportCenterX = viewportRect.left + viewportRect.width / 2;
-    let bestIndex = 0;
-    let bestDistance = Infinity;
-
-    slides.forEach((slide, index) => {
-      const rect = slide.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const dist = Math.abs(centerX - viewportCenterX);
-      if (dist < bestDistance) {
-        bestDistance = dist;
-        bestIndex = index;
-      }
-    });
-    return bestIndex;
-  };
-
-  if (dotsRoot) {
-    dotsRoot.innerHTML = "";
-    slides.forEach((_, index) => {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "carousel-dot";
-      dot.setAttribute("aria-label", `Go to work ${index + 1}`);
-      dot.setAttribute("aria-current", index === 0 ? "true" : "false");
-      dot.addEventListener("click", () => scrollToIndex(index));
-      dotsRoot.appendChild(dot);
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      const current = getActiveIndex();
-      const prev = current <= 0 ? slides.length - 1 : current - 1;
-      scrollToIndex(prev);
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      const current = getActiveIndex();
-      const next = current >= slides.length - 1 ? 0 : current + 1;
-      scrollToIndex(next);
-    });
-  }
-
-  let rafId = null;
-  viewport.addEventListener(
-    "scroll",
-    () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => setActiveDot(getActiveIndex()));
-    },
-    { passive: true }
-  );
-
-  window.addEventListener("resize", () => setActiveDot(getActiveIndex()));
-  setActiveDot(0);
 }

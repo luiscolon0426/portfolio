@@ -5,13 +5,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luis Colon</title>
-  <link rel="shortcut icon" href="img/works/favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="css/main.css?v=8" />
-  <link rel="stylesheet" href="css/media.css?v=8" />
+  <meta name="description"
+    content="Luis Colon is a Puerto Rico-based full-stack software engineer and UI/UX designer building web, mobile, healthcare, and financial products." />
+  <meta name="author" content="Luis Colon" />
+  <meta name="theme-color" content="#10191b" />
+  <link rel="canonical" href="https://luiscolon0426.github.io/portfolio/" />
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Luis Colon Portfolio" />
+  <meta property="og:title" content="Luis Colon | Full Stack Software Engineer" />
+  <meta property="og:description"
+    content="Full-stack engineering, product design, professional experience, and selected work." />
+  <meta property="og:url" content="https://luiscolon0426.github.io/portfolio/" />
+  <meta property="og:image" content="https://luiscolon0426.github.io/portfolio/img/og-portfolio.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Luis Colon — Full Stack Software Engineer and UI/UX Designer" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Luis Colon | Full Stack Software Engineer" />
+  <meta name="twitter:description" content="Professional experience and selected software and product-design work." />
+  <meta name="twitter:image" content="https://luiscolon0426.github.io/portfolio/img/og-portfolio.png" />
+  <link rel="stylesheet" href="css/main.css?v=9" />
+  <link rel="stylesheet" href="css/media.css?v=9" />
   <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
     integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Luis Colon",
+      "url": "https://luiscolon0426.github.io/portfolio/",
+      "jobTitle": "Full Stack Software Engineer and UI/UX Designer",
+      "email": "mailto:luiscolon0426@gmail.com",
+      "sameAs": [
+        "https://github.com/luiscolon0426",
+        "https://www.linkedin.com/in/leonel-s-187222268/"
+      ],
+      "knowsAbout": [
+        "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "PHP", "Laravel",
+        "Python", "Flutter", "MongoDB", "MySQL", "Redis", "UI/UX Design"
+      ]
+    }
+  </script>
 </head>
 
 <body>
@@ -37,7 +74,8 @@
               <a href="#contact" class="nav-link">Contact</a>
             </li>
           </ul>
-          <button id="nav-btn" class="nav-btn">
+          <button class="language-toggle" type="button" data-language-toggle aria-label="Cambiar a español">ES</button>
+          <button id="nav-btn" class="nav-btn" type="button" aria-expanded="false" aria-controls="nav">
             <img id="nav-btn-img" src="img/icons/open.svg" alt="Navigation button" />
           </button>
         </nav>
@@ -69,6 +107,25 @@
             <a href="#projects" class="btn">My Portfolio</a>
             <a href="#contact" class="btn btn-white">Contact Me</a>
           </div>
+        </div>
+      </div>
+      <div class="impact-grid" aria-label="Career highlights" data-aos="fade-up" data-aos-delay="700"
+        data-aos-duration="900">
+        <div class="impact-item">
+          <strong>5+</strong>
+          <span>Years of experience</span>
+        </div>
+        <div class="impact-item">
+          <strong>20+</strong>
+          <span>Production features delivered</span>
+        </div>
+        <div class="impact-item">
+          <strong>50K+</strong>
+          <span>Monthly users supported</span>
+        </div>
+        <div class="impact-item">
+          <strong>40%</strong>
+          <span>Performance improvement</span>
         </div>
       </div>
     </div>
@@ -323,6 +380,7 @@
                   aria-hidden="true">↗</span></a>
               <a href="https://github.com/luiscolon0426/cheat-doc" target="_blank" rel="noopener noreferrer">Source
                 code <span aria-hidden="true">↗</span></a>
+              <a href="projects/cheatdoc.html">Case study <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </article>
@@ -344,6 +402,9 @@
               <li>Web App</li>
             </ul>
             <div class="project-status"><span aria-hidden="true"></span> In development</div>
+            <div class="project-links project-links-case-study">
+              <a href="projects/chivito.html">Case study <span aria-hidden="true">→</span></a>
+            </div>
           </div>
         </article>
       </div>
@@ -363,14 +424,21 @@
         </p>
       </div>
 
-      <form class="contactForm" data-aos="zoom-in" data-aos-duration="1000">
-        <div class="contact-button" data-aos="fade-zoom-in" data-aos-easing="ease-in-out" data-aos-delay="500"
-          data-aos-duration="1000"><a href="https://wa.me/17876033059" target="_blank" class="btn btn-red">
-            📞 WhatsApp
-          </a>
-        </div>
-      </form>
-      <div class="response"></div>
+      <div class="contact-actions" data-aos="zoom-in" data-aos-duration="900">
+        <a href="mailto:luiscolon0426@gmail.com" class="contact-action contact-action-primary">
+          <span class="contact-action-label">Email me</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/leonel-s-187222268/" target="_blank" rel="noopener noreferrer"
+          class="contact-action">
+          <span class="contact-action-label">LinkedIn</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+        <a href="https://wa.me/17876033059" target="_blank" rel="noopener noreferrer" class="contact-action">
+          <span class="contact-action-label">WhatsApp</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -388,7 +456,7 @@
         </div>
 
         <div class="footer-copyright">
-          <p>&copy; Copyright Luis Colon 2025</p>
+          <p>&copy; <span data-current-year>2026</span> Luis Colon</p>
         </div>
       </div>
     </div>
@@ -402,7 +470,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
     integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="module" src="js/main.js?v=5"></script>
+  <script type="module" src="js/main.js?v=6"></script>
+  <script type="module" src="js/i18n.js?v=1"></script>
 </body>
 
 </html>

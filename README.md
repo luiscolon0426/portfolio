@@ -1,54 +1,61 @@
-# Simple Developer Portfolio Template
+# Luis Colon — Portfolio
 
-## Description
+Personal portfolio for Luis Colon, a full-stack software engineer and UI/UX designer based in Puerto Rico.
 
-This is a very simple, but elegant responsive portfolio template built using plain JavaScript, HTML, and CSS. It’s designed to be easily customizable, allowing any developer to quickly create a personal portfolio site. Below you'll find detailed information about the features and how to use this template.
+## Live site
 
-## Table of Contents
-
-- [Features](#features)
-- [Live Preview](#live-preview)
-- [Usage](#usage)
-- [Recent Updates](#recent-updates)
-- [License](#license)
+[luiscolon0426.github.io/portfolio](https://luiscolon0426.github.io/portfolio/)
 
 ## Features
 
-- Responsive Design
-- Single-page layout
-- Simple and customizable
-- PHP Mailer Integration
+- Responsive, accessible single-page portfolio
+- Professional experience and résumé-backed career highlights
+- Categorized technical skills with mobile carousel controls
+- Selected client and personal work
+- Shareable CheatDoc and Chivito case studies
+- Persistent English/Spanish language switch
+- Search and social-sharing metadata with `Person` structured data
+- Direct email, LinkedIn, and WhatsApp contact options
 
-## Live Preview
+## Technology
 
-Check out the live preview of the Simple Developer Portfolio [here](https://hhlitval.github.io/simple-portfolio-template).
+- Semantic HTML
+- Modern CSS
+- Vanilla JavaScript modules
+- AOS for entrance animations
+- Devicon for technology icons
+- GitHub Pages for hosting
 
-## Usage
+## Run locally
 
-To use this template, follow these steps:
+From the repository root:
 
-1. **Clone the Repository**: 
-    ```bash
-    git clone https://github.com/hhlitval/simple-portfolio-template.git
-    ```
-2. **Customization**:
-   - Update `index.html` with your information.
-   - Modify `style.css` for custom styles.
-3. **Email Integration**:
-   To enable email functionality:
-   - Upload the project to a PHP-enabled server.
-   - Configure the `mail.php` file with your email credentials.
-4. **Deployment**:
-   - Host the project on a server that supports PHP for email functionality.
-   - **If hosting on GitHub Pages, note that email handling will not work, since GitHub Pages is a static hosting service**.
+```bash
+python3 -m http.server 8000
+```
 
-## Recent Updates
+Open [http://localhost:8000](http://localhost:8000).
 
-- Refactored font sizes and styles for improved readability and balance.
-- Reworked animations for smoother transitions and a modern look.
-- Removed the preloader for a faster, simplified user experience.
-- Added [PHP Mailer](https://github.com/PHPMailer/PHPMailer) integration for email handling (requires a PHP-enabled server, not supported on GitHub Pages).
+## Deployment
+
+GitHub Pages deploys the root of the `main` branch. Push changes with:
+
+```bash
+git add .
+git commit -m "Update portfolio"
+git push origin main
+```
+
+## Structure
+
+```text
+css/       Main, responsive, and case-study styles
+img/       Portfolio, project, favicon, and social-preview assets
+js/        Navigation, carousel, and localization behavior
+projects/  Individual case-study pages
+index.html Main portfolio page
+```
 
 ## License
 
-This project is licensed under the MIT License.
+MIT

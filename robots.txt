@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://luiscolon0426.github.io/portfolio/sitemap.xml
