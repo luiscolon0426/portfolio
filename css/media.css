@@ -78,7 +78,7 @@
   .nav.open .nav-list {
     position: fixed;
     inset: 0;
-    background-color: #fff;
+    background-color: var(--primary-bg-color);
     z-index: 1;
     padding: 46px 30px;
     display: flex;
@@ -91,11 +91,11 @@
   }
 
   .nav-link {
-    color: #565a5b;
+    color: var(--gray-text-color);
   }
 
   .nav-link.active {
-    color: #0c1618;
+    color: var(--main-text-color);
   }
 
   .nav-btn {
@@ -109,12 +109,25 @@
     position: fixed;
   }
 
+  .header:not(.header-sticky) .nav.open .nav-link {
+    color: var(--gray-text-color);
+  }
+
+  .header:not(.header-sticky) .nav.open .nav-link.active {
+    color: var(--main-text-color);
+  }
+
+  .header:not(.header-sticky) .nav.open .nav-btn img {
+    filter: none;
+  }
+
   .header-nav {
     margin-bottom: 0;
   }
 
   .hero {
     padding-top: 160px;
+    padding-bottom: 90px;
   }
 
   .social-links-row {

@@ -2,13 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 :root {
-  --primary-bg-color: #f7fbfd;
-  --primary-accent: #0c1618;
-  --secondary-accent: #6f1d1b;
+  --primary-bg-color: #f2f5f4;
+  --primary-accent: #10191b;
+  --secondary-accent: #8a4a48;
+  --teal-accent: #367072;
+  --bronze-accent: #735c35;
+  --surface-color: #ffffff;
 
-  --main-text-color: #0c1618;
-  --supportive-text-color: #242d2f;
-  --gray-text-color: #565a5b;
+  --main-text-color: #10191b;
+  --supportive-text-color: #293638;
+  --gray-text-color: #5c6667;
 
   --white-color: #fff;
   --gray-color: #e9e8e8;
@@ -33,6 +36,7 @@ i {
 
 body {
   color: var(--main-text-color);
+  background-color: var(--surface-color);
   font-family: "Poppins", sans-serif;
   letter-spacing: -0.15px;
 }
@@ -128,6 +132,16 @@ body {
   font-weight: 600;
   text-align: center;
   margin-bottom: 54px;
+}
+
+.title::after {
+  display: block;
+  width: 54px;
+  height: 3px;
+  border-radius: 999px;
+  margin: 12px auto 0;
+  background: linear-gradient(90deg, var(--secondary-accent), var(--teal-accent), var(--bronze-accent));
+  content: "";
 }
 
 .btn {
@@ -237,7 +251,9 @@ h5 {
   left: 0;
   width: 100%;
   z-index: 1999;
-  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(16, 25, 27, 0.08);
+  background-color: rgba(242, 245, 244, 0.94);
+  backdrop-filter: blur(12px);
   padding-top: 0;
   padding-bottom: 0;
   transition: all 0.3s ease-in-out;
@@ -274,11 +290,32 @@ h5 {
   text-underline-offset: 7px;
 }
 
+.header:not(.header-sticky) .logo,
+.header:not(.header-sticky) .nav-link {
+  color: #f2f5f4;
+}
+
+.header:not(.header-sticky) .nav-btn img {
+  filter: brightness(0) invert(1);
+}
+
 /* Hero section */
 .hero {
   position: relative;
+  display: flex;
+  min-height: min(760px, 100svh);
+  align-items: center;
   padding-top: 180px;
-  background-color: var(--primary-bg-color);
+  padding-bottom: 110px;
+  background-color: var(--primary-accent);
+  background-image: radial-gradient(circle at 10% 28%, rgba(138, 74, 72, 0.38), transparent 32%),
+    radial-gradient(circle at 86% 22%, rgba(54, 112, 114, 0.36), transparent 34%),
+    radial-gradient(circle at 72% 92%, rgba(115, 92, 53, 0.3), transparent 30%);
+  color: #f2f5f4;
+}
+
+.hero .container {
+  width: 100%;
 }
 
 .hero-row {
@@ -298,7 +335,7 @@ h5 {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: var(--secondary-accent);
+  color: #d58b87;
 }
 
 .hero-heading {
@@ -311,6 +348,31 @@ h5 {
 .hero-heading-subtitle {
   font-size: clamp(1.125rem, 1.054rem + 0.36vw, 1.375rem);
   font-weight: 400;
+  color: #c8cecf;
+}
+
+.hero .btn {
+  border-color: var(--secondary-accent);
+  background-color: var(--secondary-accent);
+}
+
+.hero .btn:hover,
+.hero .btn:focus {
+  border-color: var(--teal-accent);
+  background-color: var(--teal-accent);
+}
+
+.hero .btn-white {
+  border-color: rgba(242, 245, 244, 0.72);
+  background: transparent;
+  color: #f2f5f4;
+}
+
+.hero .btn-white:hover,
+.hero .btn-white:focus {
+  border-color: #f2f5f4;
+  background: #f2f5f4;
+  color: var(--primary-accent);
 }
 
 .hero-img {
@@ -354,9 +416,20 @@ h5 {
     brightness(97%) contrast(103%);
 }
 
+.hero .social-links-row a {
+  filter: brightness(0) invert(1);
+  opacity: 0.76;
+}
+
+.hero .social-links-row a:hover {
+  filter: brightness(0) invert(1);
+  opacity: 1;
+}
+
 /* About section */
 .about {
   padding: 7rem 0;
+  background-color: var(--surface-color);
 }
 
 .about-row {
@@ -423,6 +496,25 @@ h5 {
 
 .service-card {
   max-width: 300px;
+  padding: 28px 24px;
+  border: 1px solid var(--gray-color-3);
+  border-top: 3px solid var(--secondary-accent);
+  border-radius: 14px;
+  background-color: var(--primary-bg-color);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.service-card:nth-child(2) {
+  border-top-color: var(--teal-accent);
+}
+
+.service-card:nth-child(3) {
+  border-top-color: var(--bronze-accent);
+}
+
+.service-card:hover {
+  box-shadow: 0 16px 38px rgba(16, 25, 27, 0.09);
+  transform: translateY(-3px);
 }
 
 .service-card-img {
@@ -568,6 +660,8 @@ h5 {
 .projects {
   padding: 7rem 0;
   background-color: var(--primary-bg-color);
+  background-image: radial-gradient(circle at 8% 20%, rgba(54, 112, 114, 0.1), transparent 25%),
+    radial-gradient(circle at 92% 82%, rgba(115, 92, 53, 0.09), transparent 28%);
 }
 
 .projects-title {
@@ -662,12 +756,12 @@ h5 {
   height: 9px;
   border-radius: 999px;
   border: 0;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(16, 25, 27, 0.2);
   cursor: pointer;
 }
 
 .carousel-dot[aria-current="true"] {
-  background: var(--secondary-accent);
+  background: var(--teal-accent);
 }
 
 @media (hover: none) {
@@ -731,7 +825,7 @@ h5 {
 
 
 .project-mask {
-  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7);
+  background: linear-gradient(180deg, rgba(16, 25, 27, 0.08), rgba(16, 25, 27, 0.92));
   height: 100%;
   position: absolute;
   transition: all 0.5s ease-in-out 0s;
@@ -776,6 +870,9 @@ h5 {
 .contact {
   padding: 7rem 0;
   text-align: center;
+  background-color: var(--surface-color);
+  background-image: radial-gradient(circle at 18% 80%, rgba(138, 74, 72, 0.09), transparent 24%),
+    radial-gradient(circle at 82% 18%, rgba(54, 112, 114, 0.09), transparent 26%);
 }
 
 .contact-content {
@@ -821,6 +918,7 @@ h5 {
 /* Footer */
 .footer {
   background-color: var(--primary-accent);
+  background-image: linear-gradient(120deg, rgba(138, 74, 72, 0.15), rgba(54, 112, 114, 0.14) 55%, rgba(115, 92, 53, 0.16));
   color: var(--gray-color-3);
 }
 
@@ -1004,6 +1102,19 @@ h5 {
   text-transform: uppercase;
 }
 
+.skill-group:nth-child(1) .skill-group-title {
+  color: var(--secondary-accent);
+}
+
+.skill-group:nth-child(2) .skill-group-title {
+  color: var(--teal-accent);
+}
+
+.skill-group:nth-child(3) .skill-group-title,
+.skill-group:nth-child(4) .skill-group-title {
+  color: var(--bronze-accent);
+}
+
 .skill-group-heading {
   display: flex;
   align-items: center;
@@ -1041,7 +1152,7 @@ h5 {
 }
 
 .skill-icon:hover {
-  border-color: var(--gray-color-2);
+  border-color: var(--teal-accent);
   box-shadow: 0 8px 22px rgba(12, 22, 24, 0.08);
   transform: translateY(-2px);
 }
@@ -1070,7 +1181,8 @@ h5 {
   padding: 6px 11px;
   border: 1px solid var(--gray-color-3);
   border-radius: 999px;
-  background-color: var(--primary-bg-color);
+  background-color: rgba(115, 92, 53, 0.08);
+  border-color: rgba(115, 92, 53, 0.2);
   color: var(--supportive-text-color);
   font-size: 11px;
   line-height: 1;
