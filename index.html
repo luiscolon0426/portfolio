@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luis Colon</title>
   <link rel="shortcut icon" href="img/works/favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="css/main.css?v=7" />
-  <link rel="stylesheet" href="css/media.css?v=7" />
+  <link rel="stylesheet" href="css/main.css?v=8" />
+  <link rel="stylesheet" href="css/media.css?v=8" />
   <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
     integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
@@ -31,7 +31,7 @@
               <a href="#experience" class="nav-link">Experience</a>
             </li>
             <li class="nav-item">
-              <a href="#projects" class="nav-link">Works</a>
+              <a href="#projects" class="nav-link">Work</a>
             </li>
             <li class="nav-item">
               <a href="#contact" class="nav-link">Contact</a>
@@ -274,57 +274,78 @@
   <section id="projects" class="projects">
     <div class="container container-lg">
       <div class="projects-title">
-        <h2 class="title">Works</h2>
+        <span class="section-eyebrow projects-eyebrow">Things I've built</span>
+        <h2 class="title">Selected Work</h2>
+        <p class="projects-intro">Client work, independent products, and ideas I've built for fun.</p>
       </div>
 
-      <div class="projects-carousel" data-carousel="projects">
-        <button class="carousel-btn carousel-btn-prev" type="button" aria-label="Previous work">
-          <span aria-hidden="true">‹</span>
-        </button>
-        <div class="carousel-viewport" data-carousel-viewport>
-          <div class="projects-row carousel-track" data-carousel-track>
-            <div class="project-box" data-aos="fade-zoom-in" data-aos-easing="ease-in-out" data-aos-delay="900"
-              data-aos-duration="1000">
-              <a href="https://casamanresaaibonito.com/">
-                <img class="project-img" src="img/works/04.jpg" alt="" />
-                <div class="project-mask">
-                  <div class="project-caption">
-                    <h5 class="white">Casa Manresa</h5>
-                    <p class="white">UI/UX Design, Web Development</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="project-box" data-aos="fade-zoom-in" data-aos-easing="ease-in-out" data-aos-delay="1200"
-              data-aos-duration="1000">
-              <a href="https://cheatdoc.netlify.app/">
-                <img class="project-img" src="img/works/06.png" alt="" />
-                <div class="project-mask">
-                  <div class="project-caption">
-                    <h5 class="white">CheatDoc</h5>
-                    <p class="white">UI/UX Design, Web Development</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <div class="project-box" data-aos="fade-zoom-in" data-aos-easing="ease-in-out" data-aos-delay="1500"
-              data-aos-duration="1000">
-              <a href="#!">
-                <img class="project-img" src="img/works/chivito.png" alt="Chivito app logo" />
-                <div class="project-mask">
-                  <div class="project-caption">
-                    <h5 class="white">Chivito</h5>
-                    <p class="white">UI/UX Design, Web Development</p>
-                  </div>
-                </div>
-              </a>
+      <div class="selected-work-grid" role="list">
+        <article class="project-card" role="listitem" data-aos="fade-up" data-aos-duration="900">
+          <div class="project-media">
+            <img class="project-image" src="img/works/04.jpg" alt="Casa Manresa website preview" />
+            <span class="project-category project-category-client">Client Work</span>
+          </div>
+          <div class="project-details">
+            <h3>Casa Manresa</h3>
+            <p class="project-description">A responsive website for a retreat and event destination in Aibonito,
+              designed to make its spaces and services easy to explore.</p>
+            <p class="project-role">My role: UI/UX design and web development</p>
+            <ul class="project-tags" aria-label="Casa Manresa disciplines">
+              <li>UI/UX</li>
+              <li>Responsive Design</li>
+              <li>Web Development</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://casamanresaaibonito.com/" target="_blank" rel="noopener noreferrer">Visit website <span
+                  aria-hidden="true">↗</span></a>
             </div>
           </div>
-        </div>
-        <button class="carousel-btn carousel-btn-next" type="button" aria-label="Next work">
-          <span aria-hidden="true">›</span>
-        </button>
-        <div class="carousel-dots" data-carousel-dots aria-label="Works carousel pagination"></div>
+        </article>
+
+        <article class="project-card" role="listitem" data-aos="fade-up" data-aos-duration="900"
+          data-aos-delay="150">
+          <div class="project-media">
+            <img class="project-image" src="img/works/06.png" alt="CheatDoc application preview" />
+            <span class="project-category project-category-personal">Personal Project</span>
+          </div>
+          <div class="project-details">
+            <h3>CheatDoc</h3>
+            <p class="project-description">A fast, searchable reference library that helps developers find useful
+              syntax and examples without breaking their flow.</p>
+            <p class="project-role">My role: Product design and full-stack development</p>
+            <ul class="project-tags" aria-label="CheatDoc technologies">
+              <li>Next.js</li>
+              <li>TypeScript</li>
+              <li>Tailwind CSS</li>
+            </ul>
+            <div class="project-links">
+              <a href="https://cheatdoc.netlify.app/" target="_blank" rel="noopener noreferrer">Live site <span
+                  aria-hidden="true">↗</span></a>
+              <a href="https://github.com/luiscolon0426/cheat-doc" target="_blank" rel="noopener noreferrer">Source
+                code <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card project-card-chivito" role="listitem" data-aos="fade-up" data-aos-duration="900"
+          data-aos-delay="300">
+          <div class="project-media">
+            <img class="project-image" src="img/works/chivito.png" alt="Chivito application logo" />
+            <span class="project-category project-category-experiment">Personal Project</span>
+          </div>
+          <div class="project-details">
+            <h3>Chivito</h3>
+            <p class="project-description">A Puerto Rico-focused service discovery concept designed to connect people
+              with trusted local professionals.</p>
+            <p class="project-role">My role: Product strategy, UI/UX design, and development</p>
+            <ul class="project-tags" aria-label="Chivito disciplines">
+              <li>Product Design</li>
+              <li>UI/UX</li>
+              <li>Web App</li>
+            </ul>
+            <div class="project-status"><span aria-hidden="true"></span> In development</div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -381,7 +402,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
     integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="module" src="js/main.js?v=3"></script>
+  <script type="module" src="js/main.js?v=5"></script>
 </body>
 
 </html>

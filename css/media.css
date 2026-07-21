@@ -38,6 +38,10 @@
 }
 
 @media (max-width: 977px) {
+  .selected-work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .title {
     font-size: 36px;
   }
@@ -169,6 +173,33 @@
 }
 
 @media (max-width: 720px) {
+  .projects .container-lg {
+    padding-inline: 0;
+  }
+
+  .projects-title {
+    padding-inline: 32px;
+  }
+
+  .selected-work-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 4px 32px 22px;
+    scroll-padding-inline: 32px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .selected-work-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-card {
+    flex: 0 0 min(84vw, 350px);
+    scroll-snap-align: center;
+  }
+
   .experience-grid {
     grid-template-columns: 1fr;
   }
@@ -256,7 +287,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .skill-icon {
+  .skill-icon,
+  .project-card,
+  .project-image {
     transition: none;
   }
 }

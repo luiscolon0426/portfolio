@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   form();
   skillbar();
-  initProjectsCarousel();
   initSkillsCarousels();
 
   const nav = document.querySelector("#nav");
